@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import * as _ from 'lodash';
 import React from 'react';
 
@@ -14,33 +14,33 @@ describe('<Bar />', () => {
   ];
 
   it(`Render ${data.length} rectangles in a simple Bar`, () => {
-    const wrapper = render(
+    render(
       <Surface width={500} height={500}>
         <Bar isAnimationActive={false} layout="horizontal" data={data} dataKey="value" />
       </Surface>,
     );
 
-    expect(wrapper.getAllByRole('img')).toHaveLength(data.length);
+    expect(screen.getAllByRole('img')).toHaveLength(data.length);
   });
 
   it(`Render ${data.length} rectangles in a vertical Bar`, () => {
-    const wrapper = render(
+    render(
       <Surface width={500} height={500}>
         <Bar isAnimationActive={false} layout="vertical" data={data} dataKey="value" />
       </Surface>,
     );
 
-    expect(wrapper.getAllByRole('img')).toHaveLength(data.length);
+    expect(screen.getAllByRole('img')).toHaveLength(data.length);
   });
 
   it("Don't render any rectangle when data is empty", () => {
-    const wrapper = render(
+    render(
       <Surface width={500} height={500}>
         <Bar data={[]} dataKey="value" />
       </Surface>,
     );
 
-    expect(wrapper.queryAllByRole('img')).toHaveLength(0);
+    expect(screen.queryAllByRole('img')).toHaveLength(0);
   });
 
   describe('With background', () => {
